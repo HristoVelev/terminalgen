@@ -44,19 +44,19 @@ tui_state = {
 
 def draw_tui_ncdu(draw, font):
     """Draws an ncdu-style disk usage interface."""
-    x, y = WIDTH - 600, 50
-    w, h = 550, 400
+    x, y = WIDTH - (FONT_SIZE * 35), 50
+    w, h = (FONT_SIZE * 30), (FONT_SIZE * 22)
 
     # Border
     draw.rectangle([x, y, x + w, y + h], outline=TEXT_COLOR, width=2)
-    draw.rectangle([x, y, x + w, y + 30], fill=TEXT_COLOR)  # Header
+    draw.rectangle([x, y, x + w, y + FONT_SIZE + 10], fill=TEXT_COLOR)  # Header
     draw.text(
         (x + 10, y + 5), f"ncdu 1.15.1 ~ Use cursor keys", font=font, fill=BG_COLOR
     )
 
     # Content
     path_str = f"--- {tui_state['current_dir']} ---"
-    draw.text((x + 10, y + 40), path_str, font=font, fill=TEXT_COLOR)
+    draw.text((x + 10, y + FONT_SIZE + 20), path_str, font=font, fill=TEXT_COLOR)
 
     # Fake file list
     if not tui_state["files"] or random.random() < 0.1:
@@ -70,23 +70,34 @@ def draw_tui_ncdu(draw, font):
         ]
         tui_state["files"].sort(key=lambda x: x["size"], reverse=True)
 
+    row_height = FONT_SIZE + 5
     for i, f in enumerate(tui_state["files"]):
         color = TEXT_COLOR
         if i == (int(time.time() * 2) % 12):  # Simulate selection moving
             draw.rectangle(
-                [x + 5, y + 70 + i * 25, x + w - 5, y + 70 + (i + 1) * 25],
+                [
+                    x + 5,
+                    y + (FONT_SIZE * 2 + 30) + i * row_height,
+                    x + w - 5,
+                    y + (FONT_SIZE * 2 + 30) + (i + 1) * row_height,
+                ],
                 fill=(40, 40, 40),
             )
 
         size_bar = "#" * (f["size"] // 50)
         line = f"{f['size']:>5} MiB  [ {size_bar:<10} ]  {f['name']}"
-        draw.text((x + 10, y + 72 + i * 25), line, font=font, fill=color)
+        draw.text(
+            (x + 10, y + (FONT_SIZE * 2 + 32) + i * row_height),
+            line,
+            font=font,
+            fill=color,
+        )
 
 
 def draw_tui_copy(draw, font):
     """Draws a verbose file copy stream."""
-    x, y = WIDTH - 700, 50
-    w, h = 650, 450
+    w, h = (FONT_SIZE * 40), (FONT_SIZE * 25)
+    x, y = WIDTH - w - 50, 50
 
     if not tui_state.get("copy_logs"):
         tui_state["copy_logs"] = []
@@ -101,7 +112,9 @@ def draw_tui_copy(draw, font):
     # Draw background box
     draw.rectangle([x, y, x + w, y + h], fill=(0, 20, 0, 150), outline=TEXT_COLOR)
     for i, log in enumerate(tui_state["copy_logs"]):
-        draw.text((x + 10, y + 10 + i * 22), log, font=font, fill=TEXT_COLOR)
+        draw.text(
+            (x + 10, y + 10 + i * (FONT_SIZE + 4)), log, font=font, fill=TEXT_COLOR
+        )
 
 
 def draw_progress_bar(draw, font):
@@ -118,13 +131,13 @@ def draw_progress_bar(draw, font):
 
 def draw_progress_bar(draw, font):
     global progress_val
-    bar_width = 400
-    bar_height = 30
-    x, y = (WIDTH - bar_width) // 2, HEIGHT - 100
+    bar_width = FONT_SIZE * 20
+    bar_height = FONT_SIZE + 10
+    x, y = (WIDTH - bar_width) // 2, HEIGHT - (FONT_SIZE * 4)
 
     label = CONFIG.get("progress_label", "PROCESSING")
     progress_str = f"{label}: {int(progress_val * 100)}%"
-    draw.text((x, y - 25), progress_str, font=font, fill=TEXT_COLOR)
+    draw.text((x, y - FONT_SIZE - 5), progress_str, font=font, fill=TEXT_COLOR)
 
     # Outer box
     draw.rectangle([x, y, x + bar_width, y + bar_height], outline=TEXT_COLOR, width=2)
@@ -266,6 +279,8 @@ def generate_line():
 def parse_and_draw(draw, text, pos, font):
     x, y = pos
     parts = text.split("\033[")
+    # Use the local FONT_SIZE or TEXT_COLOR might be better,
+    # but we need to ensure we use the GLOBALS updated in render_sequence
     current_color = TEXT_COLOR
 
     draw.text((x, y), parts[0], font=font, fill=current_color)
