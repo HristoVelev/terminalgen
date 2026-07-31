@@ -321,6 +321,8 @@ def render_sequence():
     os.makedirs(output_dir, exist_ok=True)
 
     font_paths = [
+        "font.ttf",
+        "screengen/font.ttf",
         "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
         "/usr/share/fonts/TTF/DejaVuSansMono.ttf",
         "C:\\Windows\\Fonts\\consola.ttf",
