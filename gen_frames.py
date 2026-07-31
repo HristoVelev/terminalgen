@@ -300,6 +300,16 @@ def parse_and_draw(draw, text, pos, font):
 
 
 def render_sequence():
+    global CONFIG, WIDTH, HEIGHT, BG_COLOR, TEXT_COLOR, FONT_SIZE, LINE_SPACING
+    CONFIG = load_config()
+
+    # Configuration from YAML
+    WIDTH, HEIGHT = CONFIG.get("width", 1920), CONFIG.get("height", 1080)
+    BG_COLOR = tuple(CONFIG.get("bg_color", [0, 0, 0]))
+    TEXT_COLOR = tuple(CONFIG.get("text_color", [0, 255, 0]))
+    FONT_SIZE = CONFIG.get("font_size", 18)
+    LINE_SPACING = CONFIG.get("line_spacing", 2)
+
     # Priority for label: Recipe filename > config['label'] > 'boot'
     label = CONFIG.get("label", "boot")
     if len(sys.argv) > 1 and sys.argv[1].endswith((".yml", ".yaml")):
