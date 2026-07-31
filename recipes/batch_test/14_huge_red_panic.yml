@@ -1,9 +1,34 @@
-label: "far_view_panic"
+label: far_view_panic
 num_frames: 120
 lines_per_frame: 1
-text_color: [255, 0, 0]
+width: 1920
+height: 1080
+fps: 24
 font_size: 64
 line_spacing: 20
+bg_color:
+- 0
+- 0
+- 0
+text_color:
+- 255
+- 0
+- 0
+show_scanlines: true
 show_danger_banner: true
+show_progress_bar: true
+show_glitch: true
+show_tui_overlay: true
+show_shell_prompt: true
+prompt_prefix: root@db-cluster-01-prod-internal-ssd-04:~#
+prompt_command_speed: 0.2
+tui_type: ncdu
+tui_speed: 1.0
+progress_label: DECRYPTING_VOL_01
+progress_speed: 0.005
+glitch_chance: 0.1
+glitch_intensity: 20
+prob_hex_dump: 0.2
 prob_danger: 0.1
+prob_warning: 0.1
 flash_intensity: 0.3

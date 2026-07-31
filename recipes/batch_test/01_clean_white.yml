@@ -1,9 +1,34 @@
-label: "slow_stable_boot"
+label: slow_stable_boot
 num_frames: 300
 lines_per_frame: 1
-text_color: [240, 240, 240] # Clean white/grey
-prob_hex_dump: 0.05
-prob_danger: 0.01
+width: 1920
+height: 1080
+fps: 24
+font_size: 18
+line_spacing: 2
+bg_color:
+- 0
+- 0
+- 0
+text_color:
+- 240
+- 240
+- 240
 show_scanlines: true
+show_danger_banner: true
+show_progress_bar: true
 show_glitch: false
 show_tui_overlay: false
+show_shell_prompt: true
+prompt_prefix: root@db-cluster-01-prod-internal-ssd-04:~#
+prompt_command_speed: 0.2
+tui_type: ncdu
+tui_speed: 1.0
+progress_label: DECRYPTING_VOL_01
+progress_speed: 0.005
+glitch_chance: 0.1
+glitch_intensity: 20
+prob_hex_dump: 0.05
+prob_danger: 0.01
+prob_warning: 0.1
+flash_intensity: 0.2
