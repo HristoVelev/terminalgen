@@ -42,13 +42,18 @@ python gen_frames.py
 python gen_frames.py recipes/panic_mode.yml
 ```
 
-## 🍱 Recipes
+## 🍱 Recipes & Previews
 
-Recipes are stored in `recipes/`. You can create your own by copying `recipes/template.yml`.
+The project includes several pre-configured recipes to get different looks. Here are some examples:
 
-- `slow_boot.yml`: Realistic, calm system initialization.
-- `panic_mode.yml`: High-speed scrolling, red text, heavy glitches, and meltdown alerts.
-- `data_exfil.yml`: Verbose file copying TUI with a progress bar.
+| Style | Preview | Description |
+|-------|---------|-------------|
+| **Brutal Red** | ![Brutal Red](previews/brutal_red.webp) | High intensity alarms and red theme. |
+| **Vintage CRT** | ![Vintage CRT](previews/vintage_crt.webp) | Large text, scanlines, and high line spacing. |
+| **HTOP Monitor** | ![HTOP](previews/htop.webp) | Process and CPU monitoring interface. |
+| **Network Infiltrator** | ![Netstat](previews/netstat.webp) | Active network connection monitoring. |
+| **System Topology** | ![Schematic](previews/schematic.webp) | ASCII-based network node map. |
+| **Memory Defrag** | ![Defrag](previews/defrag.webp) | Flickering memory sector grid. |
 
 ## ⚙️ Configuration
 

@@ -14,15 +14,33 @@ line_spacing: 2
 bg_color: [0, 0, 0]
 text_color: [0, 255, 0]
 
-# Features
+# Feature Toggles
 show_scanlines: true
-show_danger_banner: false
-show_progress_bar: false
-show_glitch: false
-show_tui_overlay: false
+show_danger_banner: true
+show_progress_bar: true
+show_glitch: true
+show_tui_overlay: true
+show_shell_prompt: true
+
+# TUI Settings
+# options: "ncdu", "copy", "htop", "netstat", "schematic", "defrag"
+tui_type: "ncdu"
+tui_speed: 1.0
+
+# Shell Prompt Settings
+prompt_prefix: "root@node-01:~#"
+prompt_command_speed: 0.2
+
+# Progress Bar Settings
+progress_label: "PROCESSING"
+progress_speed: 0.005
+
+# Glitch Settings
+glitch_chance: 0.1
+glitch_intensity: 20
 
 # Probabilities
-prob_hex_dump: 0.1
-prob_danger: 0.05
-prob_warning: 0.1
-flash_intensity: 0.1
+prob_hex_dump: 0.15
+prob_danger: 0.08
+prob_warning: 0.12
+flash_intensity: 0.2
