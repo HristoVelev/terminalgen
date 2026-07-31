@@ -1,0 +1,28 @@
+# TerminalGen Recipe Template
+# Copy this to a new file in recipes/ and edit to create a new sequence style.
+
+label: "template_style"
+num_frames: 100
+lines_per_frame: 5
+width: 1920
+height: 1080
+fps: 24
+
+# Styling
+font_size: 18
+line_spacing: 2
+bg_color: [0, 0, 0]
+text_color: [0, 255, 0]
+
+# Features
+show_scanlines: true
+show_danger_banner: false
+show_progress_bar: false
+show_glitch: false
+show_tui_overlay: false
+
+# Probabilities
+prob_hex_dump: 0.1
+prob_danger: 0.05
+prob_warning: 0.1
+flash_intensity: 0.1

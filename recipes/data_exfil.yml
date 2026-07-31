@@ -1,0 +1,11 @@
+label: "data_exfil"
+num_frames: 250
+lines_per_frame: 4
+text_color: [0, 255, 150] # Cyan/Seafoam
+show_tui_overlay: true
+tui_type: "copy"
+tui_speed: 2.0
+show_progress_bar: true
+progress_label: "EXFILTRATING_DATA"
+show_scanlines: true
+prob_danger: 0.02

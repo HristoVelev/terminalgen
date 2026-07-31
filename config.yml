@@ -19,8 +19,11 @@ show_scanlines: true
 show_danger_banner: true
 show_progress_bar: true
 show_glitch: true
+show_tui_overlay: true # New Feature: ncdu/file copy style TUI
 
-# Progress Bar Settings
+# TUI Settings
+tui_type: "ncdu" # options: "ncdu", "copy"
+tui_speed: 1.0
 progress_label: "DECRYPTING_VOL_01"
 progress_speed: 0.005 # Progress per frame
 
