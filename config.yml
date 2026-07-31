@@ -1,0 +1,35 @@
+# Screengen Configuration
+
+# Output settings
+label: "glitch_progress_test"
+num_frames: 200
+lines_per_frame: 6
+width: 1920
+height: 1080
+fps: 24
+
+# Styling
+font_size: 18
+line_spacing: 2
+bg_color: [0, 0, 0]
+text_color: [0, 255, 0]
+
+# Feature Toggles
+show_scanlines: true
+show_danger_banner: true
+show_progress_bar: true
+show_glitch: true
+
+# Progress Bar Settings
+progress_label: "DECRYPTING_VOL_01"
+progress_speed: 0.005 # Progress per frame
+
+# Glitch Settings
+glitch_chance: 0.1
+glitch_intensity: 20 # Max pixel offset
+
+# Probabilities
+prob_hex_dump: 0.20
+prob_danger: 0.05
+prob_warning: 0.10
+flash_intensity: 0.2
