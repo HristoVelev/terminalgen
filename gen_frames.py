@@ -25,12 +25,12 @@ def load_config():
 
 CONFIG = load_config()
 
-# Configuration from YAML
-WIDTH, HEIGHT = CONFIG.get("width", 1920), CONFIG.get("height", 1080)
-BG_COLOR = tuple(CONFIG.get("bg_color", [0, 0, 0]))
-TEXT_COLOR = tuple(CONFIG.get("text_color", [0, 255, 0]))
-FONT_SIZE = CONFIG.get("font_size", 18)
-LINE_SPACING = CONFIG.get("line_spacing", 2)
+# Global styling variables (initialized to defaults, updated in render_sequence)
+WIDTH, HEIGHT = 1920, 1080
+BG_COLOR = (0, 0, 0)
+TEXT_COLOR = (0, 255, 0)
+FONT_SIZE = 18
+LINE_SPACING = 2
 OUTPUT_ROOT = "screengen/output"
 
 # Global state for animation
@@ -40,6 +40,18 @@ tui_state = {
     "total_size": 0,
     "current_dir": "/var/lib/docker/overlay2/data",
 }
+
+
+def apply_glitch(img, intensity):
+    """Apply a horizontal shift glitch to the image."""
+    arr = np.array(img)
+    rows, cols, channels = arr.shape
+    for _ in range(random.randint(1, 5)):
+        y_start = random.randint(0, rows - 20)
+        y_end = y_start + random.randint(2, 20)
+        shift = random.randint(-intensity, intensity)
+        arr[y_start:y_end] = np.roll(arr[y_start:y_end], shift, axis=1)
+    return Image.fromarray(arr)
 
 
 def draw_tui_ncdu(draw, font):
@@ -118,18 +130,6 @@ def draw_tui_copy(draw, font):
 
 
 def draw_progress_bar(draw, font):
-    """Apply a horizontal shift glitch to the image."""
-    arr = np.array(img)
-    rows, cols, channels = arr.shape
-    for _ in range(random.randint(1, 5)):
-        y_start = random.randint(0, rows - 20)
-        y_end = y_start + random.randint(2, 20)
-        shift = random.randint(-intensity, intensity)
-        arr[y_start:y_end] = np.roll(arr[y_start:y_end], shift, axis=1)
-    return Image.fromarray(arr)
-
-
-def draw_progress_bar(draw, font):
     global progress_val
     bar_width = FONT_SIZE * 20
     bar_height = FONT_SIZE + 10
@@ -150,18 +150,6 @@ def draw_progress_bar(draw, font):
 
     # Increment
     progress_val = min(1.0, progress_val + CONFIG.get("progress_speed", 0.005))
-
-
-def apply_glitch(img, intensity):
-    """Apply a horizontal shift glitch to the image."""
-    arr = np.array(img)
-    rows, cols, channels = arr.shape
-    for _ in range(random.randint(1, 5)):
-        y_start = random.randint(0, rows - 20)
-        y_end = y_start + random.randint(2, 20)
-        shift = random.randint(-intensity, intensity)
-        arr[y_start:y_end] = np.roll(arr[y_start:y_end], shift, axis=1)
-    return Image.fromarray(arr)
 
 
 def generate_hex_dump():
@@ -211,14 +199,6 @@ TARGETS = [
     "Basic System",
     "Encrypted Volume /dev/mapper/vault",
 ]
-
-
-def generate_hex_dump():
-    addr = f"0x{random.randint(0x1000, 0xFFFF):04X}"
-    bytes_data = " ".join([f"{random.randint(0, 255):02X}" for _ in range(8)])
-    return (
-        f"{addr}  {bytes_data}  |{''.join([random.choice('.-_/') for _ in range(8)])}|"
-    )
 
 
 def generate_shell_command():
@@ -279,8 +259,7 @@ def generate_line():
 def parse_and_draw(draw, text, pos, font):
     x, y = pos
     parts = text.split("\033[")
-    # Use the local FONT_SIZE or TEXT_COLOR might be better,
-    # but we need to ensure we use the GLOBALS updated in render_sequence
+    # Use the global TEXT_COLOR which is updated in render_sequence
     current_color = TEXT_COLOR
 
     draw.text((x, y), parts[0], font=font, fill=current_color)
@@ -318,17 +297,19 @@ def render_sequence():
     global CONFIG, WIDTH, HEIGHT, BG_COLOR, TEXT_COLOR, FONT_SIZE, LINE_SPACING
     CONFIG = load_config()
 
-    # Configuration from YAML
-    WIDTH, HEIGHT = CONFIG.get("width", 1920), CONFIG.get("height", 1080)
+    # Re-extract styling from CONFIG for the current run
+    WIDTH = CONFIG.get("width", 1920)
+    HEIGHT = CONFIG.get("height", 1080)
     BG_COLOR = tuple(CONFIG.get("bg_color", [0, 0, 0]))
     TEXT_COLOR = tuple(CONFIG.get("text_color", [0, 255, 0]))
     FONT_SIZE = CONFIG.get("font_size", 18)
     LINE_SPACING = CONFIG.get("line_spacing", 2)
 
+    print(f"STYLE APPLY: Font Size={FONT_SIZE}, Color={TEXT_COLOR}, Width={WIDTH}")
+
     # Priority for label: Recipe filename > config['label'] > 'boot'
     label = CONFIG.get("label", "boot")
     if len(sys.argv) > 1 and sys.argv[1].endswith((".yml", ".yaml")):
-        # Extract filename without extension (e.g., 'panic_mode' from 'recipes/panic_mode.yml')
         recipe_filename = os.path.splitext(os.path.basename(sys.argv[1]))[0]
         label = recipe_filename
 
@@ -350,6 +331,7 @@ def render_sequence():
             font = ImageFont.truetype(p, FONT_SIZE)
             break
     if not font:
+        print("Warning: Mono font not found, falling back to default.")
         font = ImageFont.load_default()
 
     line_height = FONT_SIZE + LINE_SPACING
@@ -394,6 +376,7 @@ def render_sequence():
             if CONFIG.get("show_danger_banner", True):
                 draw_overlay = ImageDraw.Draw(img)
                 warning_text = " !! SYSTEM COMPROMISED !! "
+                # Ensure banner font size matches
                 tw = draw_overlay.textlength(warning_text, font=font)
                 draw_overlay.rectangle(
                     [
