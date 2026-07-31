@@ -235,6 +235,74 @@ def draw_tui_netstat(draw, font):
         )
 
 
+def draw_tui_schematic(draw, font):
+    """Draws an ASCII-style system topology/schematic."""
+    w, h = (FONT_SIZE * 40), (FONT_SIZE * 20)
+    x, y = WIDTH - w - 50, 50
+
+    # Draw Background
+    draw.rectangle([x, y, x + w, y + h], fill=(0, 15, 0, 180), outline=TEXT_COLOR)
+
+    schematic = [
+        "      [ GATEWAY_NODE ]          ",
+        "             |                  ",
+        "      _______|_______           ",
+        "     |               |          ",
+        " [ DB_SVR_01 ]   [ APP_SVR_01 ] ",
+        "     |               |          ",
+        " [ STORAGE_A ]   [ BACKUP_B ]   ",
+        "     |               |          ",
+        "  (SYNCING...)    (OFFLINE)     ",
+    ]
+
+    for i, line in enumerate(schematic):
+        # Center the schematic text
+        lx = x + (w - draw.textlength(line, font=font)) // 2
+        draw.text((lx, y + 40 + i * (FONT_SIZE + 10)), line, font=font, fill=TEXT_COLOR)
+
+    # Animated "signal" between nodes
+    if int(time.time() * 2) % 2 == 0:
+        draw.text((x + w // 2 - 5, y + 85), "*", font=font, fill=(255, 255, 255))
+
+
+def draw_tui_defrag(draw, font):
+    """Draws a memory/defrag style grid."""
+    grid_size = 12
+    cell_size = FONT_SIZE * 1.5
+    w, h = grid_size * cell_size + 20, grid_size * cell_size + 40
+    x, y = WIDTH - w - 50, HEIGHT - h - 100
+
+    draw.rectangle([x, y, x + w, y + h], fill=(0, 0, 0, 220), outline=TEXT_COLOR)
+    draw.text((x + 10, y + 5), "MEMORY SECTOR MAP", font=font, fill=TEXT_COLOR)
+
+    if not tui_state.get("defrag_cells"):
+        tui_state["defrag_cells"] = [
+            random.randint(0, 3) for _ in range(grid_size * grid_size)
+        ]
+
+    for i in range(grid_size * grid_size):
+        r, c = divmod(i, grid_size)
+        cx, cy = x + 10 + c * cell_size, y + 35 + r * cell_size
+
+        # State: 0=empty, 1=used, 2=active, 3=corrupt
+        state = tui_state["defrag_cells"][i]
+        if random.random() < 0.02:
+            state = random.randint(0, 3)
+            tui_state["defrag_cells"][i] = state
+
+        color = (20, 20, 20)
+        if state == 1:
+            color = (50, 150, 50)
+        if state == 2:
+            color = (100, 255, 100)
+        if state == 3:
+            color = (255, 50, 50) if int(time.time() * 4) % 2 == 0 else (100, 0, 0)
+
+        draw.rectangle(
+            [cx + 2, cy + 2, cx + cell_size - 2, cy + cell_size - 2], fill=color
+        )
+
+
 def draw_progress_bar(draw, font):
     global progress_val
     bar_width = FONT_SIZE * 20
@@ -475,6 +543,10 @@ def render_sequence():
                 draw_tui_htop(draw, font)
             elif t_type == "netstat":
                 draw_tui_netstat(draw, font)
+            elif t_type == "schematic":
+                draw_tui_schematic(draw, font)
+            elif t_type == "defrag":
+                draw_tui_defrag(draw, font)
 
         # New Feature: Progress Bar
         if CONFIG.get("show_progress_bar", True):

@@ -1,4 +1,4 @@
-label: "htop_monitor"
+label: htop_monitor
 num_frames: 200
 lines_per_frame: 3
 width: 1920
@@ -6,23 +6,29 @@ height: 1080
 fps: 24
 font_size: 18
 line_spacing: 4
-bg_color: [0, 5, 0]
-text_color: [0, 255, 0]
+bg_color:
+- 0
+- 5
+- 0
+text_color:
+- 0
+- 255
+- 0
 show_scanlines: true
 show_danger_banner: false
 show_progress_bar: false
 show_glitch: false
 show_tui_overlay: true
-tui_type: "htop"
-tui_speed: 1.0
 show_shell_prompt: true
-prompt_prefix: "sysadmin@node-01:~$"
+prompt_prefix: sysadmin@node-01:~$
 prompt_command_speed: 0.2
+tui_type: htop
+tui_speed: 1.0
+progress_label: PROCESSING
+progress_speed: 0.005
+glitch_chance: 0.0
+glitch_intensity: 0
 prob_hex_dump: 0.1
 prob_danger: 0.05
 prob_warning: 0.1
 flash_intensity: 0.1
-glitch_chance: 0.0
-glitch_intensity: 0
-progress_label: "PROCESSING"
-progress_speed: 0.005

@@ -1,4 +1,4 @@
-label: "deep_blue"
+label: deep_blue
 num_frames: 150
 lines_per_frame: 10
 width: 1920
@@ -6,23 +6,29 @@ height: 1080
 fps: 24
 font_size: 16
 line_spacing: 1
-bg_color: [0, 0, 40]
-text_color: [100, 100, 255]
+bg_color:
+- 0
+- 0
+- 40
+text_color:
+- 100
+- 100
+- 255
 show_scanlines: true
 show_danger_banner: false
 show_progress_bar: false
 show_glitch: true
 show_tui_overlay: false
-tui_type: "ncdu"
-tui_speed: 1.0
 show_shell_prompt: false
-prompt_prefix: "user@host:~$"
+prompt_prefix: user@host:~$
 prompt_command_speed: 0.2
+tui_type: ncdu
+tui_speed: 1.0
+progress_label: DECRYPTING
+progress_speed: 0.005
+glitch_chance: 0.3
+glitch_intensity: 30
 prob_hex_dump: 0.6
 prob_danger: 0.05
 prob_warning: 0.1
 flash_intensity: 0.1
-glitch_chance: 0.3
-glitch_intensity: 30
-progress_label: "DECRYPTING"
-progress_speed: 0.005

@@ -1,4 +1,4 @@
-label: "vintage_crt"
+label: vintage_crt
 num_frames: 180
 lines_per_frame: 2
 width: 1920
@@ -6,23 +6,29 @@ height: 1080
 fps: 24
 font_size: 32
 line_spacing: 15
-bg_color: [10, 15, 10]
-text_color: [150, 255, 150]
+bg_color:
+- 10
+- 15
+- 10
+text_color:
+- 150
+- 255
+- 150
 show_scanlines: true
 show_danger_banner: false
 show_progress_bar: true
 show_glitch: true
 show_tui_overlay: false
-tui_type: "ncdu"
-tui_speed: 1.0
 show_shell_prompt: true
-prompt_prefix: "TTY1 login:"
+prompt_prefix: 'TTY1 login:'
 prompt_command_speed: 0.05
+tui_type: ncdu
+tui_speed: 1.0
+progress_label: BOOTING_SYSTEM
+progress_speed: 0.003
+glitch_chance: 0.05
+glitch_intensity: 10
 prob_hex_dump: 0.05
 prob_danger: 0.02
 prob_warning: 0.05
 flash_intensity: 0.15
-glitch_chance: 0.05
-glitch_intensity: 10
-progress_label: "BOOTING_SYSTEM"
-progress_speed: 0.003

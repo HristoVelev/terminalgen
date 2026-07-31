@@ -1,6 +1,6 @@
-label: net_infiltrator
+label: memory_corruption
 num_frames: 200
-lines_per_frame: 5
+lines_per_frame: 8
 width: 1920
 height: 1080
 fps: 24
@@ -9,11 +9,11 @@ line_spacing: 2
 bg_color:
 - 0
 - 0
-- 10
+- 0
 text_color:
-- 100
-- 150
+- 0
 - 255
+- 0
 show_scanlines: true
 show_danger_banner: true
 show_progress_bar: true
@@ -22,13 +22,13 @@ show_tui_overlay: true
 show_shell_prompt: false
 prompt_prefix: user@host:~$
 prompt_command_speed: 0.2
-tui_type: netstat
+tui_type: defrag
 tui_speed: 1.0
-progress_label: SENDING_PAYLOAD
-progress_speed: 0.004
-glitch_chance: 0.1
-glitch_intensity: 25
-prob_hex_dump: 0.2
-prob_danger: 0.1
-prob_warning: 0.1
-flash_intensity: 0.3
+progress_label: INJECTING_PAYLOAD
+progress_speed: 0.003
+glitch_chance: 0.2
+glitch_intensity: 30
+prob_hex_dump: 0.4
+prob_danger: 0.15
+prob_warning: 0.2
+flash_intensity: 0.4

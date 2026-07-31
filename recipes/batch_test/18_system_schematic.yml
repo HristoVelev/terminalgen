@@ -1,0 +1,34 @@
+label: topology_map
+num_frames: 150
+lines_per_frame: 3
+width: 1920
+height: 1080
+fps: 24
+font_size: 20
+line_spacing: 5
+bg_color:
+- 0
+- 10
+- 0
+text_color:
+- 100
+- 255
+- 100
+show_scanlines: true
+show_danger_banner: false
+show_progress_bar: true
+show_glitch: false
+show_tui_overlay: true
+show_shell_prompt: true
+prompt_prefix: network-admin@core-node-01:~$
+prompt_command_speed: 0.1
+tui_type: schematic
+tui_speed: 1.0
+progress_label: MAPPING_NETWORK
+progress_speed: 0.006
+glitch_chance: 0.0
+glitch_intensity: 0
+prob_hex_dump: 0.05
+prob_danger: 0.01
+prob_warning: 0.05
+flash_intensity: 0.1
