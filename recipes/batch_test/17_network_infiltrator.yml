@@ -1,0 +1,28 @@
+label: "net_infiltrator"
+num_frames: 200
+lines_per_frame: 5
+width: 1920
+height: 1080
+fps: 24
+font_size: 16
+line_spacing: 2
+bg_color: [0, 0, 10]
+text_color: [100, 150, 255]
+show_scanlines: true
+show_danger_banner: true
+show_progress_bar: true
+show_glitch: true
+show_tui_overlay: true
+tui_type: "netstat"
+tui_speed: 1.0
+show_shell_prompt: false
+prompt_prefix: "user@host:~$"
+prompt_command_speed: 0.2
+prob_hex_dump: 0.2
+prob_danger: 0.1
+prob_warning: 0.1
+flash_intensity: 0.3
+glitch_chance: 0.1
+glitch_intensity: 25
+progress_label: "SENDING_PAYLOAD"
+progress_speed: 0.004

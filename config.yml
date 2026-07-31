@@ -27,7 +27,7 @@ prompt_prefix: "root@db-cluster-01-prod-internal-ssd-04:~#"
 prompt_command_speed: 0.2 # Probability of a new command being "typed"
 
 # TUI Settings
-tui_type: "ncdu" # options: "ncdu", "copy"
+tui_type: "ncdu" # options: "ncdu", "copy", "htop", "netstat"
 tui_speed: 1.0
 progress_label: "DECRYPTING_VOL_01"
 progress_speed: 0.005 # Progress per frame

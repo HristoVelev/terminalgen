@@ -1,34 +1,28 @@
-label: vintage_crt
+label: "vintage_crt"
 num_frames: 180
 lines_per_frame: 2
 width: 1920
 height: 1080
 fps: 24
-font_size: 24
-line_spacing: 10
-bg_color:
-- 0
-- 0
-- 0
-text_color:
-- 200
-- 255
-- 200
+font_size: 32
+line_spacing: 15
+bg_color: [10, 15, 10]
+text_color: [150, 255, 150]
 show_scanlines: true
-show_danger_banner: true
+show_danger_banner: false
 show_progress_bar: true
 show_glitch: true
-show_tui_overlay: true
-show_shell_prompt: true
-prompt_prefix: root@db-cluster-01-prod-internal-ssd-04:~#
-prompt_command_speed: 0.2
-tui_type: ncdu
+show_tui_overlay: false
+tui_type: "ncdu"
 tui_speed: 1.0
-progress_label: DECRYPTING_VOL_01
-progress_speed: 0.005
-glitch_chance: 0.1
-glitch_intensity: 20
-prob_hex_dump: 0.2
-prob_danger: 0.05
-prob_warning: 0.1
-flash_intensity: 0.2
+show_shell_prompt: true
+prompt_prefix: "TTY1 login:"
+prompt_command_speed: 0.05
+prob_hex_dump: 0.05
+prob_danger: 0.02
+prob_warning: 0.05
+flash_intensity: 0.15
+glitch_chance: 0.05
+glitch_intensity: 10
+progress_label: "BOOTING_SYSTEM"
+progress_speed: 0.003

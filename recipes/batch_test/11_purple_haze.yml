@@ -1,4 +1,4 @@
-label: purple_haze
+label: "purple_haze"
 num_frames: 150
 lines_per_frame: 7
 width: 1920
@@ -6,29 +6,23 @@ height: 1080
 fps: 24
 font_size: 18
 line_spacing: 2
-bg_color:
-- 0
-- 0
-- 0
-text_color:
-- 200
-- 0
-- 255
+bg_color: [15, 0, 15]
+text_color: [220, 100, 255]
 show_scanlines: true
-show_danger_banner: true
-show_progress_bar: true
+show_danger_banner: false
+show_progress_bar: false
 show_glitch: true
 show_tui_overlay: true
-show_shell_prompt: true
-prompt_prefix: root@db-cluster-01-prod-internal-ssd-04:~#
+tui_type: "copy"
+tui_speed: 2.0
+show_shell_prompt: false
+prompt_prefix: "user@host:~$"
 prompt_command_speed: 0.2
-tui_type: ncdu
-tui_speed: 1.0
-progress_label: DECRYPTING_VOL_01
-progress_speed: 0.005
-glitch_chance: 0.1
-glitch_intensity: 10
-prob_hex_dump: 0.3
+prob_hex_dump: 0.4
 prob_danger: 0.05
 prob_warning: 0.1
 flash_intensity: 0.2
+glitch_chance: 0.15
+glitch_intensity: 15
+progress_label: "PROCESSING"
+progress_speed: 0.005

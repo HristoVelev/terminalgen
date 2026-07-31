@@ -1,34 +1,28 @@
-label: deep_blue
+label: "deep_blue"
 num_frames: 150
 lines_per_frame: 10
 width: 1920
 height: 1080
 fps: 24
-font_size: 18
-line_spacing: 2
-bg_color:
-- 0
-- 0
-- 0
-text_color:
-- 50
-- 50
-- 255
-show_scanlines: false
-show_danger_banner: true
-show_progress_bar: true
+font_size: 16
+line_spacing: 1
+bg_color: [0, 0, 40]
+text_color: [100, 100, 255]
+show_scanlines: true
+show_danger_banner: false
+show_progress_bar: false
 show_glitch: true
-show_tui_overlay: true
-show_shell_prompt: true
-prompt_prefix: root@db-cluster-01-prod-internal-ssd-04:~#
-prompt_command_speed: 0.2
-tui_type: ncdu
+show_tui_overlay: false
+tui_type: "ncdu"
 tui_speed: 1.0
-progress_label: DECRYPTING_VOL_01
-progress_speed: 0.005
-glitch_chance: 0.2
-glitch_intensity: 20
-prob_hex_dump: 0.5
+show_shell_prompt: false
+prompt_prefix: "user@host:~$"
+prompt_command_speed: 0.2
+prob_hex_dump: 0.6
 prob_danger: 0.05
 prob_warning: 0.1
-flash_intensity: 0.2
+flash_intensity: 0.1
+glitch_chance: 0.3
+glitch_intensity: 30
+progress_label: "DECRYPTING"
+progress_speed: 0.005

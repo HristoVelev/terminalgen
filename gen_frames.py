@@ -129,6 +129,112 @@ def draw_tui_copy(draw, font):
         )
 
 
+def draw_tui_htop(draw, font):
+    """Draws an htop-style CPU/Process monitor."""
+    w, h = (FONT_SIZE * 40), (FONT_SIZE * 20)
+    x, y = WIDTH - w - 50, 50
+
+    # Draw Background
+    draw.rectangle([x, y, x + w, y + h], fill=(0, 10, 0, 200), outline=TEXT_COLOR)
+
+    # CPU Bars
+    for i in range(4):
+        label = f"CPU{i} ["
+        draw.text(
+            (x + 10, y + 10 + i * (FONT_SIZE + 5)), label, font=font, fill=TEXT_COLOR
+        )
+
+        bar_x = x + 10 + draw.textlength(label, font=font)
+        bar_w = w - 150
+        usage = (np.sin(time.time() + i) + 1) / 2  # Oscillating usage
+
+        # Draw Bar
+        draw.rectangle(
+            [
+                bar_x,
+                y + 15 + i * (FONT_SIZE + 5),
+                bar_x + bar_w,
+                y + 15 + i * (FONT_SIZE + 5) + 10,
+            ],
+            outline=TEXT_COLOR,
+        )
+        draw.rectangle(
+            [
+                bar_x + 2,
+                y + 17 + i * (FONT_SIZE + 5),
+                bar_x + 2 + (bar_w - 4) * usage,
+                y + 17 + i * (FONT_SIZE + 5) + 6,
+            ],
+            fill=(100, 255, 100),
+        )
+
+    # Process List Header
+    header_y = y + 5 * (FONT_SIZE + 5)
+    draw.rectangle([x, header_y, x + w, header_y + FONT_SIZE + 5], fill=TEXT_COLOR)
+    draw.text(
+        (x + 5, header_y + 2),
+        "  PID USER      PRI  NI  VIRT   RES   SHR S  CPU% MEM%   TIME+  Command",
+        font=font,
+        fill=BG_COLOR,
+    )
+
+    # Fake processes
+    procs = [
+        "python3 gen_frames.py",
+        "systemd --user",
+        "ssh-agent",
+        "docker-containerd",
+        "miner_pro_x64",
+        "encrypt_vault",
+        "exfiltrate_data",
+        "nginx: worker",
+    ]
+    for i, proc in enumerate(procs):
+        py = header_y + FONT_SIZE + 10 + i * (FONT_SIZE + 2)
+        pid = 1000 + i * 142
+        cpu = (
+            random.uniform(0.1, 5.0) if "miner" not in proc else random.uniform(80, 99)
+        )
+        line = f"{pid:>5} root       20   0  124M 12412  4212 S  {cpu:>4.1f}  1.2   0:04.12 {proc}"
+        draw.text((x + 5, py), line, font=font, fill=TEXT_COLOR)
+
+
+def draw_tui_netstat(draw, font):
+    """Draws a network connection monitor."""
+    w, h = (FONT_SIZE * 45), (FONT_SIZE * 18)
+    x, y = 50, HEIGHT - h - (FONT_SIZE * 5)
+
+    draw.rectangle([x, y, x + w, y + h], fill=(0, 5, 15, 200), outline=(100, 100, 255))
+    draw.text(
+        (x + 10, y + 5),
+        "ACTIVE NETWORK CONNECTIONS (ESTABLISHED)",
+        font=font,
+        fill=(150, 150, 255),
+    )
+
+    header = "PROTO  LOCAL ADDRESS          FOREIGN ADDRESS        STATE        TX_QUE  RX_QUE"
+    draw.text((x + 10, y + FONT_SIZE + 15), header, font=font, fill=(200, 200, 255))
+
+    if not tui_state.get("net_conns"):
+        tui_state["net_conns"] = [
+            f"tcp    10.0.0.45:443         {random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}:51241   ESTABLISHED  {random.randint(0, 1024)}    0"
+            for _ in range(10)
+        ]
+
+    for i, conn in enumerate(tui_state["net_conns"]):
+        if random.random() < 0.05:  # Randomly update an entry
+            tui_state["net_conns"][i] = (
+                f"tcp    10.0.0.45:443         {random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}:{random.randint(1024, 65535)}   ESTABLISHED  {random.randint(0, 4096)}    0"
+            )
+
+        draw.text(
+            (x + 10, y + (FONT_SIZE * 2) + 25 + i * (FONT_SIZE + 2)),
+            conn,
+            font=font,
+            fill=(150, 150, 255),
+        )
+
+
 def draw_progress_bar(draw, font):
     global progress_val
     bar_width = FONT_SIZE * 20
@@ -365,6 +471,10 @@ def render_sequence():
                 draw_tui_ncdu(draw, font)
             elif t_type == "copy":
                 draw_tui_copy(draw, font)
+            elif t_type == "htop":
+                draw_tui_htop(draw, font)
+            elif t_type == "netstat":
+                draw_tui_netstat(draw, font)
 
         # New Feature: Progress Bar
         if CONFIG.get("show_progress_bar", True):
