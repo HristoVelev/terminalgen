@@ -300,7 +300,13 @@ def parse_and_draw(draw, text, pos, font):
 
 
 def render_sequence():
+    # Priority for label: Recipe filename > config['label'] > 'boot'
     label = CONFIG.get("label", "boot")
+    if len(sys.argv) > 1 and sys.argv[1].endswith((".yml", ".yaml")):
+        # Extract filename without extension (e.g., 'panic_mode' from 'recipes/panic_mode.yml')
+        recipe_filename = os.path.splitext(os.path.basename(sys.argv[1]))[0]
+        label = recipe_filename
+
     num_frames = CONFIG.get("num_frames", 120)
     lines_per_frame = CONFIG.get("lines_per_frame", 5)
 
