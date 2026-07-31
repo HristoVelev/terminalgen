@@ -1,0 +1,7 @@
+label: "vintage_crt"
+num_frames: 180
+lines_per_frame: 2
+text_color: [200, 255, 200]
+font_size: 24
+line_spacing: 10
+show_scanlines: true

@@ -1,0 +1,8 @@
+label: "stealth_exfil"
+num_frames: 200
+lines_per_frame: 5
+text_color: [150, 150, 255]
+show_tui_overlay: true
+tui_type: "copy"
+show_progress_bar: false
+show_glitch: false

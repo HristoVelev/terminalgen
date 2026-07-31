@@ -1,0 +1,7 @@
+label: "far_view_hex"
+num_frames: 150
+lines_per_frame: 3
+text_color: [100, 100, 255]
+font_size: 36
+prob_hex_dump: 0.9
+show_glitch: true

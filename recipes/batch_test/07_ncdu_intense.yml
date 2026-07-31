@@ -1,0 +1,8 @@
+label: "ncdu_scanner"
+num_frames: 200
+lines_per_frame: 2
+text_color: [255, 255, 0]
+show_tui_overlay: true
+tui_type: "ncdu"
+show_progress_bar: true
+progress_label: "INDEXING_FS"

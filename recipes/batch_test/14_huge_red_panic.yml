@@ -1,0 +1,9 @@
+label: "far_view_panic"
+num_frames: 120
+lines_per_frame: 1
+text_color: [255, 0, 0]
+font_size: 64
+line_spacing: 20
+show_danger_banner: true
+prob_danger: 0.1
+flash_intensity: 0.3

@@ -1,0 +1,9 @@
+label: "fast_green"
+num_frames: 200
+lines_per_frame: 20
+text_color: [0, 255, 0]
+show_shell_prompt: true
+prompt_prefix: "guest@anonymous_node_77:~$"
+prompt_command_speed: 0.5
+show_glitch: true
+glitch_intensity: 50

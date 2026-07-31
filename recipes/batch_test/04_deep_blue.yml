@@ -1,0 +1,8 @@
+label: "deep_blue"
+num_frames: 150
+lines_per_frame: 10
+text_color: [50, 50, 255]
+show_glitch: true
+glitch_chance: 0.2
+prob_hex_dump: 0.5
+show_scanlines: false

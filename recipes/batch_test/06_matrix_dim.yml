@@ -1,0 +1,7 @@
+label: "dim_green"
+num_frames: 150
+lines_per_frame: 3
+text_color: [0, 100, 0]
+bg_color: [0, 5, 0]
+show_scanlines: true
+prob_hex_dump: 0.8

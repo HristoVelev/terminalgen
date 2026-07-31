@@ -1,0 +1,7 @@
+label: "brutal_red"
+num_frames: 120
+lines_per_frame: 12
+text_color: [255, 0, 0]
+show_danger_banner: true
+prob_danger: 0.8
+flash_intensity: 0.5

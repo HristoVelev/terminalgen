@@ -1,0 +1,9 @@
+label: "slow_stable_boot"
+num_frames: 300
+lines_per_frame: 1
+text_color: [240, 240, 240] # Clean white/grey
+prob_hex_dump: 0.05
+prob_danger: 0.01
+show_scanlines: true
+show_glitch: false
+show_tui_overlay: false

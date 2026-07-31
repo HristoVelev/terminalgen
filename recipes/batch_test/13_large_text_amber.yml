@@ -1,0 +1,9 @@
+label: "far_view_amber"
+num_frames: 150
+lines_per_frame: 2
+text_color: [255, 176, 0]
+font_size: 42
+line_spacing: 12
+show_scanlines: true
+show_progress_bar: true
+progress_label: "SYSTEM_UPGRADE"

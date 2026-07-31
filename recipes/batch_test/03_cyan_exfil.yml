@@ -1,0 +1,9 @@
+label: "cyan_exfil"
+num_frames: 150
+lines_per_frame: 4
+text_color: [0, 255, 255]
+show_tui_overlay: true
+tui_type: "copy"
+show_progress_bar: true
+progress_label: "TRANSFERRING_KEYS"
+show_scanlines: true

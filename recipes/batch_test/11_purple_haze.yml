@@ -1,0 +1,7 @@
+label: "purple_haze"
+num_frames: 150
+lines_per_frame: 7
+text_color: [200, 0, 255]
+show_glitch: true
+glitch_intensity: 10
+prob_hex_dump: 0.3

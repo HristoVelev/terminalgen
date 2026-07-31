@@ -1,0 +1,7 @@
+label: "long_prompt_sim"
+num_frames: 200
+lines_per_frame: 4
+text_color: [0, 255, 100]
+show_shell_prompt: true
+prompt_prefix: "admin@global-datacenter-east-01-internal-routing-mesh:/var/log/traffic/archived/2026/07/31$"
+prompt_command_speed: 0.4

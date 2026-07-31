@@ -1,0 +1,14 @@
+label: "amber_alert"
+num_frames: 150
+lines_per_frame: 15
+text_color: [255, 191, 0] # Red Tint
+prob_danger: 0.6
+prob_hex_dump: 0.4
+flash_intensity: 0.4
+glitch_chance: 0.3
+glitch_intensity: 40
+show_danger_banner: true
+show_glitch: true
+show_progress_bar: true
+progress_label: "CORE_MELTDOWN"
+progress_speed: 0.02
