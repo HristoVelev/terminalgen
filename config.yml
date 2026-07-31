@@ -19,7 +19,12 @@ show_scanlines: true
 show_danger_banner: true
 show_progress_bar: true
 show_glitch: true
-show_tui_overlay: true # New Feature: ncdu/file copy style TUI
+show_tui_overlay: true
+show_shell_prompt: true # New Feature: Shell prompt lines
+
+# Prompt Settings
+prompt_prefix: "root@db-cluster-01-prod-internal-ssd-04:~#"
+prompt_command_speed: 0.2 # Probability of a new command being "typed"
 
 # TUI Settings
 tui_type: "ncdu" # options: "ncdu", "copy"

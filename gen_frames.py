@@ -208,9 +208,30 @@ def generate_hex_dump():
     )
 
 
+def generate_shell_command():
+    prefix = CONFIG.get("prompt_prefix", "user@host:~$")
+    commands = [
+        "ls -laR /var/log/remote_backups/",
+        "grep -r 'PASSWORD' /etc/nginx/conf.d/",
+        "ssh deploy@10.0.4.152 'cat /proc/cpuinfo'",
+        "find / -name '*.key' -exec cp {} /tmp/exfil/ \;",
+        'curl -X POST http://api.internal/v1/auth -d \'{"user":"admin"}\'',
+        "tail -f /var/log/auth.log | grep 'Accepted'",
+        "nmap -sS -A -T4 10.0.0.0/24",
+        "rm -rf /usr/local/lib/node_modules/legacy-app/",
+    ]
+    return f"\033[92m{prefix}\033[0m {random.choice(commands)}"
+
+
 def generate_line():
     ts = f"[{random.uniform(0, 500):10.6f}] "
     chance = random.random()
+
+    # New: Shell prompt chance
+    if CONFIG.get("show_shell_prompt", False) and chance < CONFIG.get(
+        "prompt_command_speed", 0.2
+    ):
+        return generate_shell_command(), False
 
     if chance < CONFIG.get("prob_hex_dump", 0.15):
         return ts + generate_hex_dump(), False
